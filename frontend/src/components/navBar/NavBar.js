@@ -1,27 +1,37 @@
 import React from 'react'
 import AppBar from '@mui/material/AppBar';
+import Container from '@mui/material/Container'
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 
 import NavBarTitle from './NavBarTitle';
 import NavBarController from './NavBarController';
 
+
 function NavBar() {
+
     return (
-        <Box 
-            sx={{ flexGrow: 1 }}
-        >
-            <AppBar position='static' sx={{background: 'transparent', boxShadow: 'none'}}>
-                <Toolbar>
-                    <Box 
-                        sx={{display: 'flex', justifyContent: 'space-around'}}
-                    >
-                        <NavBarTitle />
-                        <NavBarController />
-                    </Box>
-                </Toolbar>
+        <Container>
+            <AppBar
+                position='static'
+                sx={{
+                    background: 'transparent',
+                    boxShadow: 'none',
+                }}
+
+            >
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDireciton: 'row',
+                        justifyContent: 'space-between',
+                        margin: '.5rem 0rem'
+                    }}
+                >
+                    <NavBarTitle />
+                    <NavBarController />
+                </Box>
             </AppBar>
-        </Box>
+        </Container>
     )
 }
 
