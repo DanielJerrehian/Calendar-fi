@@ -14,7 +14,6 @@ function NavBar() {
             <AppBar position='static' sx={{background: 'transparent', boxShadow: 'none'}}>
                 <Toolbar>
                     <Box 
-                        // sx={{ flexGrow: 1 }}
                         sx={{display: 'flex', justifyContent: 'space-around'}}
                     >
                         <NavBarTitle />
