@@ -35,6 +35,7 @@ function NavBarMobile(props) {
             <IconButton
                 onClick={handleOpenNavMenu}
                 color="inherit"
+            // disableElevation
             >
                 <MenuIcon />
             </IconButton>

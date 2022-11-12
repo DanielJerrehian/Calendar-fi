@@ -18,7 +18,7 @@ function NavBarDesktop(props) {
             {
                 buttonRoutes.map((buttonRoute) => (
                     <Button
-                        color='primary'
+                        key={buttonRoute?.route}
                         variant='contained'
                         disableElevation
                         onClick={() => handleNavigate(buttonRoute?.route)}

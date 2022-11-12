@@ -1,9 +1,6 @@
 const buttonRoutes = [
-    {name: 'My Calendar', route: 'home'},
-    {name: 'About', route: 'about'},
-    {name: 'Login', route: 'login'},
-    {name: 'Sign Up Today', route: 'register'},
-
+    { name: 'Calendar', route: '' },
+    { name: 'About', route: 'about' },
 ]
 
 export default buttonRoutes

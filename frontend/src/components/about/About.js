@@ -2,16 +2,16 @@ import React from 'react'
 import Container from '@mui/material/Container'
 import Typography from '@mui/material/Typography'
 
-function RouteNotFound() {
+function About() {
     return (
         <Container>
             <Typography
                 align='center'
             >
-                404 - Not Found
+                About
             </Typography>
         </Container>
     )
 }
 
-export default RouteNotFound
+export default About

@@ -10,14 +10,15 @@ import NavBarController from './NavBarController';
 function NavBar() {
 
     return (
-        <Container>
+        <Container
+            sx={{ marginBottom: 3 }}
+        >
             <AppBar
                 position='static'
                 sx={{
                     background: 'transparent',
                     boxShadow: 'none',
                 }}
-
             >
                 <Box
                     sx={{
