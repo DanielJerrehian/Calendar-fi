@@ -1,20 +1,20 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
 import { getDaysOfWeek, getTimeArray } from '../calendarSlice';
 import DateCell from './DateCell';
 import TimeCell from './TimeCell';
 import AppointmentCell from './AppointmentCell';
+import AppointmentDrawer from './appointmentDrawer/AppointmentDrawer';
 
 
 function Calendar() {
-    const dispatch = useDispatch();
     const daysOfWeek = useSelector(getDaysOfWeek);
     const timeRows = useSelector(getTimeArray);
 
     return (
-        <Grid container>
+        <Grid container maxWidth='xl'>
             <Grid item xs={12}>
                 <Grid container>
                     {daysOfWeek.map((dayOfWeek, id) => {
@@ -37,6 +37,7 @@ function Calendar() {
                     )
                 })}
             </Grid>
+            <AppointmentDrawer />
         </Grid>
     )
 }

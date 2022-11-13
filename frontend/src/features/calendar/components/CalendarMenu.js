@@ -34,7 +34,6 @@ function CalendarMenu() {
                         ? `${monthMonday} ${year}`
                         : `${monthMonday} - ${monthSaturday} ${year}`
                 }
-
             </Typography>
             <CalendarMenuButtons />
         </Box>

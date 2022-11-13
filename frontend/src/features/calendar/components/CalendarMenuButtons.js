@@ -12,7 +12,6 @@ function CalendarMenuButtons() {
     const dispatch = useDispatch();
     const weekNumber = useSelector(getWeekNumber);
 
-
     return (
         <Box
             sx={{

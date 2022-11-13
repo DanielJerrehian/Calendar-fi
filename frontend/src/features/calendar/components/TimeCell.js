@@ -15,7 +15,7 @@ function TimeCell(props) {
             item
             xs={12 / 7}
             sx={{
-                height: 60,
+                height: 70,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

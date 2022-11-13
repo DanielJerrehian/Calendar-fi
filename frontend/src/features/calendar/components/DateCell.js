@@ -19,7 +19,7 @@ function DateCell(props) {
             item
             xs={12 / 7}
             sx={{
-                height: 60,
+                height: 70,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

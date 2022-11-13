@@ -1,13 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import Grid from '@mui/material/Grid';
 
-import { getWeekDaysMapper, getWeekNumber, getBorderWidth, getBorderColor, getToday } from '../calendarSlice';
+import { getWeekDaysMapper, getWeekNumber, getBorderWidth, getBorderColor, getNow, setSelectedAppointmentDateTime, setDrawerOpen } from '../calendarSlice';
+
 
 function AppointmentCell(props) {
     const { dayCell, timeRow } = props;
-    const today = moment(useSelector(getToday), 'MM-DD-YYYY, HH');
+    const dispatch = useDispatch()
+    const today = moment(useSelector(getNow), 'MM-DD-YYYY, HH');
     const weekDaysMapper = useSelector(getWeekDaysMapper);
     const weekNumber = useSelector(getWeekNumber);
     const borderWidth = useSelector(getBorderWidth);
@@ -15,13 +17,18 @@ function AppointmentCell(props) {
     const appointmentDateTime = moment(`${weekDaysMapper[weekNumber][dayCell]}, ${timeRow}`, 'MM-DD-YYYY, h A')
     const appointmentInPast = appointmentDateTime.isBefore(today);
 
+    const handleDrawer = () => {
+        dispatch(setSelectedAppointmentDateTime(appointmentDateTime.format('MM-DD-YYYY, HH')));
+        dispatch(setDrawerOpen(true));
+    }
+
     return (
         <Grid
             item
             xs={12 / 7}
-            onClick={() => appointmentInPast ? null : console.log(appointmentDateTime.format('MM-DD-YYYY, HH'))}
+            onClick={appointmentInPast ? null : handleDrawer}
             sx={{
-                height: 60,
+                height: 70,
                 display: 'flex',
                 backgroundColor: appointmentInPast ? '#DCDCDC' : '',
                 borderRight: `${borderWidth} solid ${borderColor}`, '&:last-child': { borderRight: 'none' },
