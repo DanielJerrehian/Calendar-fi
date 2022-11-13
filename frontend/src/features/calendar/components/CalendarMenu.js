@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -20,7 +20,6 @@ function CalendarMenu() {
             sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'center',
                 justifyContent: 'space-between'
             }}
         >

@@ -32,7 +32,8 @@ function AppointmentCell(props) {
                 display: 'flex',
                 backgroundColor: appointmentInPast ? '#DCDCDC' : '',
                 borderRight: `${borderWidth} solid ${borderColor}`, '&:last-child': { borderRight: 'none' },
-                borderBottom: `${borderWidth} solid ${borderColor}`, '&:last-child': { borderRight: 'none' }
+                borderBottom: `${borderWidth} solid ${borderColor}`, '&:last-child': { borderRight: 'none' },
+                cursor: 'pointer'
             }}
         >
         </Grid>

@@ -16,7 +16,7 @@ function AppointmentDrawer(props) {
             anchor='left'
             variant='persistent'
             open={drawerOpen}
-            PaperProps={{ sx: { width: '30%', elevation: 0 } }}
+            PaperProps={{ sx: { minWidth: '30%', elevation: 0 } }}
         >
             <Box
                 sx={{
