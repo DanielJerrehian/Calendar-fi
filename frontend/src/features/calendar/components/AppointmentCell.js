@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import Grid from '@mui/material/Grid';
@@ -18,6 +18,7 @@ function AppointmentCell(props) {
     const appointmentInPast = appointmentDateTime.isBefore(today);
 
     const handleDrawer = () => {
+        // setAppointmentSelected(true);
         dispatch(setSelectedAppointmentDateTime(appointmentDateTime.format('MM-DD-YYYY, HH')));
         dispatch(setDrawerOpen(true));
     }
@@ -30,10 +31,11 @@ function AppointmentCell(props) {
             sx={{
                 height: 70,
                 display: 'flex',
+                // backgroundColor: (appointmentSelected ? '#7aff86' : appointmentInPast ? '#DCDCDC' : ''),
                 backgroundColor: appointmentInPast ? '#DCDCDC' : '',
                 borderRight: `${borderWidth} solid ${borderColor}`, '&:last-child': { borderRight: 'none' },
                 borderBottom: `${borderWidth} solid ${borderColor}`, '&:last-child': { borderRight: 'none' },
-                cursor: 'pointer'
+                cursor: appointmentInPast ? 'not-allowed' : 'pointer'
             }}
         >
         </Grid>
