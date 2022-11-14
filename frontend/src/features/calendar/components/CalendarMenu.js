@@ -25,7 +25,7 @@ function CalendarMenu() {
         >
             <Typography
                 sx={{
-                    fontSize: 20
+                    fontSize: { xs: 18, lg: 24 }
                 }}
             >
                 {

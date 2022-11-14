@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 
-import { getSelectedAppointmentDateTime, setDrawerOpen, getAppointmentFormValidationError, setAppointmentFormValidationError, setEmailMatchValidationError, getEmailMatchValidationError } from '../../calendarSlice';
+import { getSelectedAppointmentDateTime, setDrawerOpen, getAppointmentFormValidationError, setAppointmentFormValidationError, setEmailMatchValidationError, getEmailMatchValidationError, setSelectedAppointmentDateTime } from '../../calendarSlice';
 
 
 function AppointmentDrawerForm() {
@@ -20,6 +20,11 @@ function AppointmentDrawerForm() {
     const appointmentFormValidationError = useSelector(getAppointmentFormValidationError);
     const emailMatchValidationError = useSelector(getEmailMatchValidationError);
     const [newAppointment, setNewAppointment] = useState({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
+
+    const handleCloseForm = () => {
+        dispatch(setDrawerOpen(false));
+        dispatch(setSelectedAppointmentDateTime(null));
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -105,7 +110,7 @@ function AppointmentDrawerForm() {
                     Appointment Details:
                 </Typography>
                 <IconButton
-                    onClick={() => dispatch(setDrawerOpen(false))}
+                    onClick={handleCloseForm}
                 >
                     <CloseIcon />
                 </IconButton>

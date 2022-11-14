@@ -6,7 +6,7 @@ import createTimeArray from '../../utils/date/timeArray';
 
 
 const initialState = {
-    now: moment().format('MM-DD-YYYY, HH'),
+    now: moment().format(),
     weekNumber: moment().isoWeek(),
     timeArray: createTimeArray(9, 18),
     daysOfWeek: ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
