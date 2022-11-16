@@ -4,14 +4,15 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import moment from 'moment';
 
-import { getWeekDaysMapper, getWeekNumber, getBorderWidth, getBorderColor } from '../calendarSlice';
+import { getWeekDaysMapper, getWeekNumber } from '../calendarSlice';
+import borderWidth from '../../../utils/style/borderWidth';
+import borderColor from '../../../utils/style/borderColor';
+
 
 function DateCell(props) {
     const { dayOfWeek } = props;
     const weekDaysMapper = useSelector(getWeekDaysMapper);
     const weekNumber = useSelector(getWeekNumber);
-    const borderWidth = useSelector(getBorderWidth);
-    const borderColor = useSelector(getBorderColor);
     const dateDayNumber = moment(weekDaysMapper[weekNumber][dayOfWeek], 'MM-DD-YYYY').format('D');
 
     return (

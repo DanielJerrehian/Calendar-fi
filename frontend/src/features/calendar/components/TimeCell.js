@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import { getBorderWidth, getBorderColor } from '../calendarSlice';
+import borderWidth from '../../../utils/style/borderWidth';
+import borderColor from '../../../utils/style/borderColor';
+
 
 function TimeCell(props) {
     const { timeRow } = props;
-    const borderWidth = useSelector(getBorderWidth);
-    const borderColor = useSelector(getBorderColor);
 
     return (
         <Grid

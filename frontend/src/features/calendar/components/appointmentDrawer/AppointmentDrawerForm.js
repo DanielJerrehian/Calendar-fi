@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 
-import { getSelectedAppointmentDateTime, setDrawerOpen, getAppointmentFormValidationError, setAppointmentFormValidationError, setEmailMatchValidationError, getEmailMatchValidationError, setSelectedAppointmentDateTime } from '../../calendarSlice';
+import { getSelectedAppointmentDateTime, getAppointmentFormValidationError, getEmailMatchValidationError, scheduleNewAppointment, setDrawerOpen, setAppointmentFormValidationError, setEmailMatchValidationError, setSelectedAppointmentDateTime } from '../../calendarSlice';
 
 
 function AppointmentDrawerForm() {
@@ -58,7 +58,8 @@ function AppointmentDrawerForm() {
             }
         }
         if (submit) {
-            console.log(newAppointment);
+            // console.log(newAppointment);
+            dispatch(scheduleNewAppointment(newAppointment));
             dispatch(setDrawerOpen(false));
             setNewAppointment({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
         }
@@ -121,6 +122,7 @@ function AppointmentDrawerForm() {
                     label='Title'
                     variant='outlined'
                     margin='normal'
+                    required
                     fullWidth
                     value={newAppointment?.title}
                     error={appointmentFormValidationError?.title}
@@ -131,6 +133,7 @@ function AppointmentDrawerForm() {
                     label='E-Mail'
                     variant='outlined'
                     margin='normal'
+                    required
                     fullWidth
                     value={newAppointment?.email}
                     error={appointmentFormValidationError?.email}
@@ -142,6 +145,7 @@ function AppointmentDrawerForm() {
                     label='Confirm E-Mail'
                     variant='outlined'
                     margin='normal'
+                    required
                     fullWidth
                     value={newAppointment?.confirmEmail}
                     error={appointmentFormValidationError?.confirmEmail}

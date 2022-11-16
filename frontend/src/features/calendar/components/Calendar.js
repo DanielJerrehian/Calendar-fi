@@ -1,18 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
+import daysOfWeek from '../../../utils/date/daysOfWeek';
+import createTimeArray from '../../../utils/date/timeArray';
 import CloseDrawerOnClickOutsideCalendar from '../../../hooks/CloseDrawerOnClickOutsideCalendar';
-import { getDaysOfWeek, getTimeArray } from '../calendarSlice';
 import DateCell from './DateCell';
 import TimeCell from './TimeCell';
 import AppointmentCell from './AppointmentCell';
 import AppointmentDrawer from './appointmentDrawer/AppointmentDrawer';
 
-
 function Calendar() {
-    const daysOfWeek = useSelector(getDaysOfWeek);
-    const timeRows = useSelector(getTimeArray);
+    const timeRows = createTimeArray(9, 17);
 
     return (
         <CloseDrawerOnClickOutsideCalendar>
@@ -25,14 +23,14 @@ function Calendar() {
                             )
                         })}
                     </Grid>
-                    {timeRows.map((timeRow, timeRowId) => {
+                    {timeRows.map((timeRow, id) => {
                         return (
-                            <Grid container key={timeRowId}>
-                                {daysOfWeek.map((dayCell, dayCellId) => {
+                            <Grid container key={id}>
+                                {daysOfWeek.map((dayCell, id) => {
                                     return (
                                         dayCell === ''
-                                            ? <TimeCell timeRow={timeRow} key={timeRowId + dayCellId} />
-                                            : <AppointmentCell key={timeRow + timeRowId + dayCellId + dayCell} dayCell={dayCell} timeRow={timeRow} />
+                                            ? <TimeCell timeRow={timeRow} key={id} />
+                                            : <AppointmentCell key={id} dayCell={dayCell} timeRow={timeRow} />
                                     )
                                 })}
                             </Grid>
