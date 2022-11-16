@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Grid from '@mui/material/Grid';
 
-import DetectClickOutsideComponent from '../../../hooks/DetectClickOutsideComponent';
+import CloseDrawerOnClickOutsideCalendar from '../../../hooks/CloseDrawerOnClickOutsideCalendar';
 import { getDaysOfWeek, getTimeArray } from '../calendarSlice';
 import DateCell from './DateCell';
 import TimeCell from './TimeCell';
@@ -15,7 +15,7 @@ function Calendar() {
     const timeRows = useSelector(getTimeArray);
 
     return (
-        <DetectClickOutsideComponent>
+        <CloseDrawerOnClickOutsideCalendar>
             <Grid container maxWidth='xl'>
                 <Grid item xs={12}>
                     <Grid container>
@@ -25,14 +25,14 @@ function Calendar() {
                             )
                         })}
                     </Grid>
-                    {timeRows.map((timeRow, id) => {
+                    {timeRows.map((timeRow, timeRowId) => {
                         return (
-                            <Grid container key={id}>
-                                {daysOfWeek.map((dayCell, id) => {
+                            <Grid container key={timeRowId}>
+                                {daysOfWeek.map((dayCell, dayCellId) => {
                                     return (
                                         dayCell === ''
-                                            ? <TimeCell timeRow={timeRow} key={id} />
-                                            : <AppointmentCell key={id} dayCell={dayCell} timeRow={timeRow} />
+                                            ? <TimeCell timeRow={timeRow} key={timeRowId + dayCellId} />
+                                            : <AppointmentCell key={timeRow + timeRowId + dayCellId + dayCell} dayCell={dayCell} timeRow={timeRow} />
                                     )
                                 })}
                             </Grid>
@@ -41,7 +41,7 @@ function Calendar() {
                 </Grid>
                 <AppointmentDrawer />
             </Grid>
-        </DetectClickOutsideComponent>
+        </CloseDrawerOnClickOutsideCalendar>
     )
 }
 

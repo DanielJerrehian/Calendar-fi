@@ -23,7 +23,7 @@ function CalendarMenuButtons() {
                 flexDireciton: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
-                gap: { xs: '1rem', lg: '2rem' },
+                gap: { xs: '.75rem', lg: '1.5rem' },
                 marginBottom: '2rem'
             }}
         >
@@ -31,6 +31,7 @@ function CalendarMenuButtons() {
                 variant='contained'
                 size='small'
                 disableElevation
+                sx={{ textTransform: 'capitalize' }}
                 startIcon={<ArrowBackIosIcon />}
                 onClick={() => dispatch(updateWeekNumber(-1))}
                 disabled={weekNumber === moment().isoWeek() ? true : false}
@@ -41,6 +42,7 @@ function CalendarMenuButtons() {
                 variant='contained'
                 size='small'
                 disableElevation
+                sx={{ textTransform: 'capitalize' }}
                 endIcon={<ArrowForwardIosIcon />}
                 onClick={() => dispatch(updateWeekNumber(1))}
                 disabled={weekNumber === moment().isoWeek() + 3 ? true : false}
