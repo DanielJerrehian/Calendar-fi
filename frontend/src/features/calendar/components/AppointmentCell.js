@@ -15,7 +15,7 @@ import borderColor from '../../../utils/style/borderColor';
 function AppointmentCell(props) {
     const { dayCell, timeRow } = props;
     const theme = useTheme();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const today = moment(useSelector(getNow));
     const weekDaysMapper = useSelector(getWeekDaysMapper);
     const weekNumber = useSelector(getWeekNumber);
@@ -28,13 +28,13 @@ function AppointmentCell(props) {
     const fadeColor = keyframes`from {background-color: ${theme.palette.primary.light};} to {background-color: ${theme.palette.primary.main};}`;
 
     const checkIfAppointmentBooked = () => {
-        for (let i = 0; i < scheduledAppointments.length; i++) {
-            if (appointmentDateTime.format('MM-DD-YYYY, HH') === moment(scheduledAppointments[i]?.appointmentTime, 'MM-DD-YYYY, HH').format('MM-DD-YYYY, HH')) {
-                setAppointmentBooked(true);
-                console.log(appointmentDateTime.format('DD-MM-YYYY, HH'))
-            };
-        };
+        appointmentInPast
+            ? setAppointmentBooked(false)
+            : scheduledAppointments.map(el => el.appointmentTime).includes(appointmentDateTime.format('MM-DD-YYYY, HH'))
+                ? setAppointmentBooked(true)
+                : setAppointmentBooked(false)
     }
+
     const handleDrawer = () => {
         dispatch(setSelectedAppointmentDateTime(appointmentDateTime.format('MM-DD-YYYY, HH')));
         dispatch(setDrawerOpen(true));
@@ -42,9 +42,7 @@ function AppointmentCell(props) {
 
     useEffect(() => {
         checkIfAppointmentBooked();
-    }, [scheduledAppointments]);
-
-    // console.log(scheduledAppointments);
+    }, [appointmentInPast, scheduledAppointments, weekNumber]);
 
     return (
         <Grid

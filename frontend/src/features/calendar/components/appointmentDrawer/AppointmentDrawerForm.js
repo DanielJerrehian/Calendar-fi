@@ -12,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 
 import { getSelectedAppointmentDateTime, getAppointmentFormValidationError, getEmailMatchValidationError, scheduleNewAppointment, setDrawerOpen, setAppointmentFormValidationError, setEmailMatchValidationError, setSelectedAppointmentDateTime } from '../../calendarSlice';
+import ConfirmAppointmentDialog from './ConfirmAppointmentDialog';
 
 
 function AppointmentDrawerForm() {
@@ -20,6 +21,7 @@ function AppointmentDrawerForm() {
     const appointmentFormValidationError = useSelector(getAppointmentFormValidationError);
     const emailMatchValidationError = useSelector(getEmailMatchValidationError);
     const [newAppointment, setNewAppointment] = useState({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleCloseForm = () => {
         dispatch(setDrawerOpen(false));
@@ -36,8 +38,7 @@ function AppointmentDrawerForm() {
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const prepareSubmit = () => {
         for (let [name, value] of Object.entries(newAppointment)) {
             if (name !== 'notes') {
                 let object = {}
@@ -58,11 +59,20 @@ function AppointmentDrawerForm() {
             }
         }
         if (submit) {
-            // console.log(newAppointment);
-            dispatch(scheduleNewAppointment(newAppointment));
-            dispatch(setDrawerOpen(false));
-            setNewAppointment({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
+            setDialogOpen(true);
         }
+    }
+
+    const handleDrawerAndDialog = () => {
+        setDialogOpen(false);
+        dispatch(setDrawerOpen(false));
+        setNewAppointment({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(scheduleNewAppointment(newAppointment));
+        handleDrawerAndDialog();
     }
 
     useEffect(() => {
@@ -89,122 +99,124 @@ function AppointmentDrawerForm() {
     }, [dispatch, newAppointment])
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-            }}
-        >
+        <>
             <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
+                    flexDirection: 'column',
                 }}
             >
-                <Typography
-                    sx={{
-                        fontSize: 24
-                    }}
-                >
-                    Appointment Details:
-                </Typography>
-                <IconButton
-                    onClick={handleCloseForm}
-                >
-                    <CloseIcon />
-                </IconButton>
-            </Box>
-            <form>
-                <TextField
-                    name='title'
-                    label='Title'
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    value={newAppointment?.title}
-                    error={appointmentFormValidationError?.title}
-                    onChange={handleChange}
-                />
-                <TextField
-                    name='email'
-                    label='E-Mail'
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    value={newAppointment?.email}
-                    error={appointmentFormValidationError?.email}
-                    helperText={emailMatchValidationError ? "E-Mails don't match" : null}
-                    onChange={handleChange}
-                />
-                <TextField
-                    name='confirmEmail'
-                    label='Confirm E-Mail'
-                    variant='outlined'
-                    margin='normal'
-                    required
-                    fullWidth
-                    value={newAppointment?.confirmEmail}
-                    error={appointmentFormValidationError?.confirmEmail}
-                    helperText={emailMatchValidationError ? "E-Mails don't match" : null}
-                    onChange={handleChange}
-                />
                 <Box
                     sx={{
                         display: 'flex',
-                        flexDirection: { xs: 'column', xl: 'row' },
-                        gap: { xs: 0, xl: 3 },
+                        flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'space-between'
                     }}
                 >
-                    <LocalizationProvider dateAdapter={AdapterMoment}>
-                        <DateTimePicker
-                            renderInput={(props) => <TextField {...props} margin='normal' fullWidth />}
-                            label='Start'
-                            name='startDateTime'
-                            value={moment(appointmentDateTime, 'MM-DD-YYYY, HH')}
-                            disabled={true}
-                            onChange={() => null}
-                        />
-                        <DateTimePicker
-                            renderInput={(props) => <TextField {...props} margin='normal' fullWidth />}
-                            label='End'
-                            name='endDateTime'
-                            value={moment(appointmentDateTime, 'MM-DD-YYYY, HH').add(1, 'h')}
-                            disabled={true}
-                            onChange={() => null}
-                        />
-                    </LocalizationProvider>
+                    <Typography
+                        sx={{
+                            fontSize: 24
+                        }}
+                    >
+                        Appointment Details:
+                    </Typography>
+                    <IconButton
+                        onClick={handleCloseForm}
+                    >
+                        <CloseIcon />
+                    </IconButton>
                 </Box>
-                <TextField
-                    label='Notes'
-                    name='notes'
-                    multiline
-                    fullWidth
-                    minRows={4}
-                    maxRows={6}
-                    margin='normal'
-                    variant='outlined'
-                    value={newAppointment?.notes}
-                    error={appointmentFormValidationError?.notes}
-                    onChange={handleChange}
-                />
-                <Button
-                    type='submit'
-                    variant='contained'
-                    disableElevation
-                    fullWidth
-                    sx={{ marginTop: 2 }}
-                    onClick={handleSubmit}
-                >
-                    Schedule
-                </Button>
-            </form>
-        </Box>
+                <form>
+                    <TextField
+                        name='title'
+                        label='Title'
+                        variant='outlined'
+                        margin='normal'
+                        required
+                        fullWidth
+                        value={newAppointment?.title}
+                        error={appointmentFormValidationError?.title}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        name='email'
+                        label='E-Mail'
+                        variant='outlined'
+                        margin='normal'
+                        required
+                        fullWidth
+                        value={newAppointment?.email}
+                        error={appointmentFormValidationError?.email}
+                        helperText={emailMatchValidationError ? "E-Mails don't match" : null}
+                        onChange={handleChange}
+                    />
+                    <TextField
+                        name='confirmEmail'
+                        label='Confirm E-Mail'
+                        variant='outlined'
+                        margin='normal'
+                        required
+                        fullWidth
+                        value={newAppointment?.confirmEmail}
+                        error={appointmentFormValidationError?.confirmEmail}
+                        helperText={emailMatchValidationError ? "E-Mails don't match" : null}
+                        onChange={handleChange}
+                    />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: { xs: 'column', xl: 'row' },
+                            gap: { xs: 0, xl: 3 },
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <LocalizationProvider dateAdapter={AdapterMoment}>
+                            <DateTimePicker
+                                renderInput={(props) => <TextField {...props} margin='normal' fullWidth />}
+                                label='Start'
+                                name='startDateTime'
+                                value={moment(appointmentDateTime, 'MM-DD-YYYY, HH')}
+                                disabled={true}
+                                onChange={() => null}
+                            />
+                            <DateTimePicker
+                                renderInput={(props) => <TextField {...props} margin='normal' fullWidth />}
+                                label='End'
+                                name='endDateTime'
+                                value={moment(appointmentDateTime, 'MM-DD-YYYY, HH').add(1, 'h')}
+                                disabled={true}
+                                onChange={() => null}
+                            />
+                        </LocalizationProvider>
+                    </Box>
+                    <TextField
+                        label='Notes'
+                        name='notes'
+                        multiline
+                        fullWidth
+                        minRows={4}
+                        maxRows={6}
+                        margin='normal'
+                        variant='outlined'
+                        value={newAppointment?.notes}
+                        error={appointmentFormValidationError?.notes}
+                        onChange={handleChange}
+                    />
+                    <Button
+                        variant='contained'
+                        disableElevation
+                        fullWidth
+                        sx={{ marginTop: 2 }}
+                        onClick={prepareSubmit}
+                    >
+                        Schedule
+                    </Button>
+                    <ConfirmAppointmentDialog dialogOpen={dialogOpen} handleDrawerAndDialog={handleDrawerAndDialog} newAppointment={newAppointment} handleSubmit={handleSubmit} />
+                </form>
+            </Box>
+        </>
     )
 }
 

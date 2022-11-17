@@ -49,6 +49,7 @@ export const calendarSlice = createSlice({
 
 export const { updateWeekNumber, scheduleNewAppointment, setSelectedAppointmentDateTime, setAppointmentFormValidationError, setEmailMatchValidationError, setDrawerOpen } = calendarSlice.actions;
 
+export const calendarReducer = (state) => state.calendar
 export const getNow = (state) => state.calendar.now;
 export const getWeekNumber = (state) => state.calendar.weekNumber;
 export const getTimeArray = (state) => state.calendar.timeArray;
