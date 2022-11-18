@@ -3,7 +3,6 @@ import Grid from '@mui/material/Grid';
 
 import daysOfWeek from '../../../utils/date/daysOfWeek';
 import createTimeArray from '../../../utils/date/timeArray';
-// import CloseDrawerOnClickOutsideCalendar from '../../../hooks/CloseDrawerOnClickOutsideCalendar';
 import DateCell from './DateCell';
 import TimeCell from './TimeCell';
 import AppointmentCell from './AppointmentCell';
@@ -13,7 +12,6 @@ function Calendar() {
     const timeRows = createTimeArray(9, 17);
 
     return (
-        // <CloseDrawerOnClickOutsideCalendar>
         <Grid container maxWidth='xl'>
             <Grid item xs={12}>
                 <Grid container>
@@ -39,7 +37,6 @@ function Calendar() {
             </Grid>
             <AppointmentDrawer />
         </Grid>
-        // </CloseDrawerOnClickOutsideCalendar>
     )
 }
 

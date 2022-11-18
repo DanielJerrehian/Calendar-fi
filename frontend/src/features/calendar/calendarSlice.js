@@ -13,6 +13,7 @@ const initialState = {
     appointmentFormValidationError: { title: false, startDateTime: false, endDateTime: false, email: false, confirmEmail: false, notes: false },
     emailMatchValidationError: false,
     drawerOpen: false,
+    alert: { display: false, severity: '', message: '' }
 }
 
 export const calendarSlice = createSlice({
@@ -43,11 +44,17 @@ export const calendarSlice = createSlice({
         },
         setDrawerOpen: (state, action) => {
             state.drawerOpen = action.payload;
+        },
+        setAlert: (state, action) => {
+            state.alert = {
+                ...state.alert,
+                ...action.payload
+            }
         }
     },
 })
 
-export const { updateWeekNumber, scheduleNewAppointment, setSelectedAppointmentDateTime, setAppointmentFormValidationError, setEmailMatchValidationError, setDrawerOpen } = calendarSlice.actions;
+export const { updateWeekNumber, scheduleNewAppointment, setSelectedAppointmentDateTime, setAppointmentFormValidationError, setEmailMatchValidationError, setDrawerOpen, setAlert } = calendarSlice.actions;
 
 export const calendarReducer = (state) => state.calendar
 export const getNow = (state) => state.calendar.now;
@@ -60,7 +67,6 @@ export const getSelectedAppointmentDateTime = (state) => state.calendar.selected
 export const getAppointmentFormValidationError = (state) => state.calendar.appointmentFormValidationError;
 export const getEmailMatchValidationError = (state) => state.calendar.emailMatchValidationError;
 export const getDrawerOpen = (state) => state.calendar.drawerOpen;
-export const getBorderWidth = (state) => state.calendar.borderWidth;
-export const getBorderColor = (state) => state.calendar.borderColor;
+export const getAlert = (state) => state.calendar.alert
 
 export default calendarSlice.reducer;

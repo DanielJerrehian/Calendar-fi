@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 
-import { getSelectedAppointmentDateTime, getAppointmentFormValidationError, getEmailMatchValidationError, scheduleNewAppointment, setDrawerOpen, setAppointmentFormValidationError, setEmailMatchValidationError, setSelectedAppointmentDateTime } from '../../calendarSlice';
+import { getSelectedAppointmentDateTime, getAppointmentFormValidationError, getEmailMatchValidationError, scheduleNewAppointment, setDrawerOpen, setAppointmentFormValidationError, setEmailMatchValidationError, setSelectedAppointmentDateTime, setAlert } from '../../calendarSlice';
 import ConfirmAppointmentDialog from './ConfirmAppointmentDialog';
 
 
@@ -73,6 +73,7 @@ function AppointmentDrawerForm() {
         e.preventDefault();
         dispatch(scheduleNewAppointment(newAppointment));
         handleDrawerAndDialog();
+        dispatch(setAlert({ display: true, severity: 'success', message: `Appointment scheduled! We just sent an E-Mail to ${newAppointment?.email} confirming the details` }));
     }
 
     useEffect(() => {
