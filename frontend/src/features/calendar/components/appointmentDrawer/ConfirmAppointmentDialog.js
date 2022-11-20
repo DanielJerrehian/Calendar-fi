@@ -22,13 +22,12 @@ function ConfirmAppointmentDialog(props) {
     const appointmentStartTime = moment(newAppointment?.startDateTime, 'MM-DD-YYYY, HH').format('h A')
     const appointmentEndTime = moment(newAppointment?.endDateTime, 'MM-DD-YYYY, HH').format('h A')
 
-
     return (
         <Dialog
             open={dialogOpen}
+            maxWidth={true}
             TransitionComponent={Transition}
             keepMounted
-        // onClose={() => handleDrawerAndDialog()}
         >
             <DialogTitle>Confirm Appointment</DialogTitle>
             <IconButton

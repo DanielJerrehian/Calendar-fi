@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
-import { theme } from './utils/theme';
+import { theme } from './utils/style/theme';
 import NavBar from './components/navBar/NavBar';
 import ScrollToTop from './hooks/ScrollToTop';
 import RouteNotFound from './components/RouteNotFound';

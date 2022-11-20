@@ -65,7 +65,7 @@ function AppointmentDrawerForm() {
 
     const handleDrawerAndDialog = () => {
         setDialogOpen(false);
-        dispatch(setDrawerOpen(false));
+        handleCloseForm();
         setNewAppointment({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
     }
 

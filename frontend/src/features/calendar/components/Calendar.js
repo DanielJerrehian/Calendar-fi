@@ -8,18 +8,29 @@ import TimeCell from './TimeCell';
 import AppointmentCell from './AppointmentCell';
 import AppointmentDrawer from './appointmentDrawer/AppointmentDrawer';
 
+import borderWidth from '../../../utils/style/borderWidth';
+import borderColor from '../../../utils/style/borderColor';
+
 function Calendar() {
     const timeRows = createTimeArray(9, 17);
 
     return (
-        <Grid container maxWidth='xl'>
+        <Grid 
+            container 
+            maxWidth='xl'
+            sx={{
+                borderTop:  `${borderWidth} solid ${borderColor}`,
+                borderLeft:  `${borderWidth} solid ${borderColor}`,
+                borderRight: `${borderWidth} solid ${borderColor}`
+            }}
+        >
             <Grid item xs={12}>
                 <Grid container>
                     {daysOfWeek.map((dayOfWeek, id) => {
                         return (
                             <DateCell dayOfWeek={dayOfWeek} key={id} />
-                        )
-                    })}
+                            )
+                        })}
                 </Grid>
                 {timeRows.map((timeRow, id) => {
                     return (
