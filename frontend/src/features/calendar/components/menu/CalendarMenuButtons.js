@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import { getWeekNumber, updateWeekNumber } from '../calendarSlice';
+import { getWeekNumber, updateWeekNumber } from '../../calendarSlice';
 
 function CalendarMenuButtons() {
     const theme = useTheme();

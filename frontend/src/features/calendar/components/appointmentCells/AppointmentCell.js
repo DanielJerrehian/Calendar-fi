@@ -4,11 +4,11 @@ import moment from 'moment';
 import Grid from '@mui/material/Grid';
 
 
-import { getWeekDaysMapper, getScheduledAppointments, getWeekNumber, getNow, setSelectedAppointmentDateTime, setDrawerOpen, getSelectedAppointmentDateTime } from '../calendarSlice';
-import AppointmentBookedCell from './appointmentCells/AppointmentBookedCell';
-import AppointmentSelectedCell from './appointmentCells/AppointmentSelectedCell';
-import borderWidth from '../../../utils/style/borderWidth';
-import borderColor from '../../../utils/style/borderColor';
+import { getWeekDaysMapper, getScheduledAppointments, getWeekNumber, getNow, setSelectedAppointmentDateTime, setDrawerOpen, getSelectedAppointmentDateTime } from '../../calendarSlice';
+import AppointmentBookedCell from './AppointmentBookedCell';
+import AppointmentSelectedCell from './AppointmentSelectedCell';
+import borderWidth from '../../../../utils/style/borderWidth';
+import borderColor from '../../../../utils/style/borderColor';
 
 
 function AppointmentCell(props) {
@@ -23,7 +23,7 @@ function AppointmentCell(props) {
     const scheduledAppointments = useSelector(getScheduledAppointments);
     const [appointmentBooked, setAppointmentBooked] = useState(false);
     const notClickable = (appointmentInPast || appointmentBooked);
-    
+
 
     const checkIfAppointmentBooked = () => {
         appointmentInPast
@@ -61,7 +61,7 @@ function AppointmentCell(props) {
                 appointmentBooked
                     ? <AppointmentBookedCell />
                     : appointmentDateTime.format('MM-DD-YYYY, HH') === selectedAppointmentDateTime && <AppointmentSelectedCell />
-                        
+
             }
         </Grid>
     )

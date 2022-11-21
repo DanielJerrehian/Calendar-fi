@@ -7,7 +7,7 @@ function AppointmentBookedCell() {
     const theme = useTheme();
     return (
         <Paper
-            elevation={2}
+            elevation={0}
             square
             sx={{
                 display: 'flex',

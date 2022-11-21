@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import CalendarMenuButtons from './CalendarMenuButtons';
-import { getWeekNumber } from '../calendarSlice';
+import { getWeekNumber } from '../../calendarSlice';
 
 function CalendarMenu() {
     const weekNumber = useSelector(getWeekNumber);
