@@ -1,11 +1,9 @@
 import React from 'react';
-import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
-import borderWidth from '../../../utils/style/borderWidth';
-import borderColor from '../../../utils/style/borderColor';
-
+import borderWidth from '../../../../../utils/style/borderWidth';
+import borderColor from '../../../../../utils/style/borderColor';
 
 function TimeCell(props) {
     const { timeRow } = props;

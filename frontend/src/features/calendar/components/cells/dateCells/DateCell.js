@@ -4,9 +4,9 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import moment from 'moment';
 
-import { getWeekDaysMapper, getWeekNumber } from '../calendarSlice';
-import borderWidth from '../../../utils/style/borderWidth';
-import borderColor from '../../../utils/style/borderColor';
+import { getWeekDaysMapper, getWeekNumber } from '../../../calendarSlice';
+import borderWidth from '../../../../../utils/style/borderWidth';
+import borderColor from '../../../../../utils/style/borderColor';
 
 
 function DateCell(props) {

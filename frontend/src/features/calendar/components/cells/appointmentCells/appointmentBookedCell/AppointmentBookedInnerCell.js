@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-function AppointmentBookedCell() {
+function AppointmentBookedInnerCell() {
     const theme = useTheme();
     return (
         <Paper
@@ -25,4 +25,4 @@ function AppointmentBookedCell() {
     )
 }
 
-export default AppointmentBookedCell
+export default AppointmentBookedInnerCell

@@ -3,9 +3,9 @@ import Grid from '@mui/material/Grid';
 
 import daysOfWeek from '../../../utils/date/daysOfWeek';
 import createTimeArray from '../../../utils/date/timeArray';
-import DateCell from './DateCell';
-import TimeCell from './TimeCell';
-import AppointmentCell from './appointmentCells/AppointmentCell';
+import DateCell from './cells/dateCells/DateCell';
+import TimeCell from './cells/timeCells/TimeCell';
+import AppointmentCell from './cells/appointmentCells/AppointmentCell';
 import AppointmentDrawer from './appointmentDrawer/AppointmentDrawer';
 
 import borderWidth from '../../../utils/style/borderWidth';
