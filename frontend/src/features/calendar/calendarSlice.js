@@ -11,7 +11,7 @@ const initialState = {
     scheduledAppointments: [{ id: 1, title: 'Haircut', email: 'user@test.com', appointmentTime: moment('11-17-2022, 13', 'MM-DD-YYYY, HH').format('MM-DD-YYYY, HH') }, { id: 2, title: 'Haircut', email: 'user@test.com', appointmentTime: moment('11-18-2022, 14', 'MM-DD-YYYY, HH').format('MM-DD-YYYY, HH') }],
     selectedAppointmentDateTime: null,
     appointmentFormValidationError: { title: false, startDateTime: false, endDateTime: false, email: false, confirmEmail: false, notes: false },
-    emailMatchValidationError: false,
+    emailValidationError: { valid: true, message: '' },
     drawerOpen: false,
     alert: { display: false, severity: 'success', message: '' }
 }
@@ -39,8 +39,11 @@ export const calendarSlice = createSlice({
                 ...action.payload
             }
         },
-        setEmailMatchValidationError: (state, action) => {
-            state.emailMatchValidationError = action.payload
+        setEmailValidationError: (state, action) => {
+            state.emailValidationError = {
+                ...state.emailValidationError,
+                ...action.payload
+            }
         },
         setDrawerOpen: (state, action) => {
             state.drawerOpen = action.payload;
@@ -54,7 +57,7 @@ export const calendarSlice = createSlice({
     },
 })
 
-export const { updateWeekNumber, scheduleNewAppointment, setSelectedAppointmentDateTime, setAppointmentFormValidationError, setEmailMatchValidationError, setDrawerOpen, setAlert } = calendarSlice.actions;
+export const { updateWeekNumber, scheduleNewAppointment, setSelectedAppointmentDateTime, setAppointmentFormValidationError, setEmailValidationError, setDrawerOpen, setAlert } = calendarSlice.actions;
 
 export const calendarReducer = (state) => state.calendar
 export const getNow = (state) => state.calendar.now;
@@ -65,7 +68,7 @@ export const getWeekDaysMapper = (state) => state.calendar.weekDaysMapper;
 export const getScheduledAppointments = (state) => state.calendar.scheduledAppointments;
 export const getSelectedAppointmentDateTime = (state) => state.calendar.selectedAppointmentDateTime;
 export const getAppointmentFormValidationError = (state) => state.calendar.appointmentFormValidationError;
-export const getEmailMatchValidationError = (state) => state.calendar.emailMatchValidationError;
+export const getEmailValidationError = (state) => state.calendar.emailValidationError;
 export const getDrawerOpen = (state) => state.calendar.drawerOpen;
 export const getAlert = (state) => state.calendar.alert
 

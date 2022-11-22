@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
+import isEmail from 'validator/lib/isEmail';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
@@ -11,7 +12,8 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Button from '@mui/material/Button';
 
-import { getSelectedAppointmentDateTime, getAppointmentFormValidationError, getEmailMatchValidationError, scheduleNewAppointment, setDrawerOpen, setAppointmentFormValidationError, setEmailMatchValidationError, setSelectedAppointmentDateTime, setAlert } from '../../calendarSlice';
+
+import { getSelectedAppointmentDateTime, getAppointmentFormValidationError, getEmailValidationError, scheduleNewAppointment, setDrawerOpen, setAppointmentFormValidationError, setEmailValidationError, setSelectedAppointmentDateTime, setAlert } from '../../calendarSlice';
 import ConfirmAppointmentDialog from './ConfirmAppointmentDialog';
 
 
@@ -19,7 +21,7 @@ function AppointmentDrawerForm() {
     const dispatch = useDispatch();
     const appointmentDateTime = useSelector(getSelectedAppointmentDateTime);
     const appointmentFormValidationError = useSelector(getAppointmentFormValidationError);
-    const emailMatchValidationError = useSelector(getEmailMatchValidationError);
+    const emailMatchValidationError = useSelector(getEmailValidationError);
     const [newAppointment, setNewAppointment] = useState({ title: '', startDateTime: '', endDateTime: '', email: '', confirmEmail: '', notes: '' })
     const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -46,8 +48,14 @@ function AppointmentDrawerForm() {
                 !value && dispatch(setAppointmentFormValidationError(object))
             }
         }
-        if (newAppointment.email !== newAppointment.confirmEmail) {
-            dispatch(setEmailMatchValidationError(true));
+        if (!isEmail(newAppointment?.email) || !isEmail(newAppointment?.confirmEmail)) {
+            dispatch(setEmailValidationError({ valid: false, message: 'Please enter a valid E-Mail' }));
+            dispatch(setAppointmentFormValidationError({ email: true }));
+            dispatch(setAppointmentFormValidationError({ confirmEmail: true }));
+            return null;
+        }
+        if (newAppointment?.email !== newAppointment?.confirmEmail) {
+            dispatch(setEmailValidationError({ valid: false, message: 'E-Mails do not match' }));
             dispatch(setAppointmentFormValidationError({ email: true }));
             dispatch(setAppointmentFormValidationError({ confirmEmail: true }));
             return null;
@@ -95,7 +103,7 @@ function AppointmentDrawerForm() {
             let object = {}
             object[name] = false
             value && dispatch(setAppointmentFormValidationError(object));
-            value && dispatch(setEmailMatchValidationError(false));
+            value && dispatch(setEmailValidationError({ valid: true }));
         }
     }, [dispatch, newAppointment])
 
@@ -149,7 +157,7 @@ function AppointmentDrawerForm() {
                         fullWidth
                         value={newAppointment?.email}
                         error={appointmentFormValidationError?.email}
-                        helperText={emailMatchValidationError ? "E-Mails don't match" : null}
+                        helperText={!emailMatchValidationError?.valid && emailMatchValidationError?.message}
                         onChange={handleChange}
                     />
                     <TextField
@@ -161,7 +169,7 @@ function AppointmentDrawerForm() {
                         fullWidth
                         value={newAppointment?.confirmEmail}
                         error={appointmentFormValidationError?.confirmEmail}
-                        helperText={emailMatchValidationError ? "E-Mails don't match" : null}
+                        helperText={!emailMatchValidationError?.valid && emailMatchValidationError?.message}
                         onChange={handleChange}
                     />
                     <Box
