@@ -14,8 +14,8 @@ function AlertBanner() {
     const alert = useSelector(getAlert);
 
     return (
-        alert?.display &&
-        <Fade in={alert?.display}>
+
+        <Fade in={alert?.display} unmountOnExit>
             <Alert
                 severity={alert?.severity}
                 sx={{
@@ -31,7 +31,7 @@ function AlertBanner() {
                         aria-label='close'
                         color='inherit'
                         size='small'
-                        onClick={() => dispatch(setAlert({ display: false, severity: '', message: '' }))}
+                        onClick={() => dispatch(setAlert({ display: false, severity: 'success', message: '' }))}
                     >
                         <CloseIcon fontSize='inherit' />
                     </IconButton>

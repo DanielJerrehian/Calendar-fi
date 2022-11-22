@@ -25,7 +25,7 @@ function ConfirmAppointmentDialog(props) {
     return (
         <Dialog
             open={dialogOpen}
-            maxWidth={true}
+            maxWidth='xl'
             TransitionComponent={Transition}
             keepMounted
         >

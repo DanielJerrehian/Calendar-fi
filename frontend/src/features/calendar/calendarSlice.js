@@ -13,7 +13,7 @@ const initialState = {
     appointmentFormValidationError: { title: false, startDateTime: false, endDateTime: false, email: false, confirmEmail: false, notes: false },
     emailMatchValidationError: false,
     drawerOpen: false,
-    alert: { display: false, severity: '', message: '' }
+    alert: { display: false, severity: 'success', message: '' }
 }
 
 export const calendarSlice = createSlice({
