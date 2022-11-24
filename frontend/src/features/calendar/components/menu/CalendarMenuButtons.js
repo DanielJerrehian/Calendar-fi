@@ -23,7 +23,7 @@ function CalendarMenuButtons() {
                 flexDireciton: 'row',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
-                gap: { xs: '.75rem', lg: '1.5rem' },
+                gap: { xs: '.25rem', lg: '.75rem' },
                 marginBottom: '2rem'
             }}
         >
